@@ -5,4 +5,4 @@ A website that serves IIIT Allahabad students freshly made bakery goods.
 1) Using HTML and CSS, we created three linked webspages showcasing our home page, products and a small introduction about us.
 <p></p>
 
-This is our first website. Thank you.
+This is our first website. Thank you. :)
