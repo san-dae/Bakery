@@ -14,7 +14,7 @@
     font-family: 'Crimson Pro', serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Ensures consistent width calculations */
+    box-sizing: border-box; 
   }
   
   .aboutbakery
@@ -321,8 +321,15 @@
 	  {
   		.main.product-container 
 		{
-   			grid-template-columns: repeat(2, 1fr); /* Adjust to 2 columns */
-    			gap: 15px; /* Optional: reduce gap */
+   			grid-template-columns: repeat(2, 1fr); 
+    			gap: 15px; 
+  		}
+
+		.main.product-container img 
+		{
+    		width: 150px; 
+   		height: 150px;
+    		object-fit: cover;
   		}
 	  }
 
@@ -330,9 +337,16 @@
 	  {
   	  .main.product-container 
 		  {
-    		   grid-template-columns: 1fr; /* Stack items in 1 column */
-    		   gap: 10px; /* Optional: reduce gap further */
+    		   grid-template-columns: 1fr; 
+    		   gap: 10px; 
 		  }
+		  
+	  .main.product-container img 
+		{
+    		width: 100px; 
+   		height: 100px;
+    		object-fit: cover;
+  		}
 	}
 
 
