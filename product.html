@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;700&family=Crimson+Pro:wght@400;700&family=EB+Garamond:wght@400;700&family=Old+Standard+TT:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+
+  body 
+  {
+    font-family: 'Crimson Pro', serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ensures consistent width calculations */
+  }
+  
+  .aboutbakery
+  {
+    padding: 50px;
+    text-align: center;
+    background: #DDF0ED;
+    color: #A75F37;
+    font-size: 20px;
+	}
+
+  .aboutbakery h1
+  {
+    font-size: 40px;
+    color: #A75F37;
+  }
+  
+  .navbar {
+      overflow: hidden;
+      background-color: #2b5288;
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+  }
+
+  .navbar a {
+      float: left;
+      display: block;
+      color: #F5EFEB;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+  }
+
+  .navbar a:hover {
+      background-color: #ddd;
+      color: black;
+  }
+
+  .navbar a.active {
+      background-color: #666;
+      color: white;
+  }
+  
+  * 
+  {
+  box-sizing: border-box;
+  }
+
+  .row 
+  {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+  }
+  
+  .row h1
+  {
+    font-size: 30px;
+  }
+
+  .side 
+  {
+      flex: 30%;
+      background-color: #c8d9e6;
+      padding: 20px;
+  }
+
+  .side h3
+  {
+    text-align: center;
+  }
+  
+  #category-container 
+  {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 10px;
+            justify-items: center;
+        }
+
+        
+        .category-item {
+            align-items: center;
+            width: 70%;
+            background-color: #ffffff;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        
+        .category-item:hover {
+            background-color: #f0f0f0;
+        }
+
+  .main 
+  {
+      flex: 70%;
+      background-color: #f9f5f1;
+      padding: 20px;
+  }
+
+  
+
+  .main .product-container 
+  {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px; 
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto; 
+  }
+
+  .main .product 
+  {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 20%;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .main .product img 
+  {
+    width: 200px; 
+    height: 200px; 
+    object-fit: cover;
+    padding: 20px;
+    border-radius: 50%;
+  }
+
+  .main .product:hover img {
+    object-fit: cover;
+    transform: scale(1.2); 
+    transition: all 0.3s ease-in-out; 
+}
+
+  .main .product h3 
+  {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #333;
+  }
+
+  .main .product p 
+  { 
+    font-size: 18px;
+    color: #11752a;
+  }
+
+  .main .product button 
+  {
+    font-family: 'Crimson Pro', serif;
+    padding: 10px 20px;
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  .main .product button:hover 
+  {
+    font-family: 'Crimson Pro', serif;
+    background-color: #262828;
+  }
+  
+  
+  .action button 
+  {
+    
+    font-family: 'Crimson Pro', serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 150px;
+    background-color: #fc6dab;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding: 0 10px;
+    text-align: center;
+  }
+
+  .action button:hover 
+  {
+    background-color: #21cdb3;
+  }
+
+  .quantity-controls 
+  {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .quantity-controls button 
+  {
+    background-color: #ddd;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .quantity-controls button:hover 
+  {
+    background-color: #ccc;
+  }
+
+  .cart-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  opacity: 0; 
+  transition: opacity 0.3s ease-in-out; 
+  }
+
+  .cart-container.show 
+  {
+      opacity: 1; 
+  }
+
+
+  .cart-container h2 
+  {
+    margin-bottom: 20px;
+  }
+
+  .cart-item 
+  {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .cart-item:last-child 
+  {
+    border-bottom: none;
+  }
+
+  .cart-total 
+  {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #eb0e6e;
+  }
+
+  .cart-button 
+  {
+    font-family: 'Crimson Pro', serif;
+    padding: 10px 20px;
+    background-color: #fc6dab;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .cart-button:hover 
+  {
+    background-color: #eb0e6e;
+  }
+
+  footer {
+    background-color: #2b5288;
+    color: #F5EFEB;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+  }
+
+  footer a {
+    color: #F5EFEB;
+    text-decoration: none;
+    margin: 0 10px;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) 
+  {
+      .product-container 
+      {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 15px; 
+      }
+
+      .product h3 
+      {
+          font-size: 16px; 
+      }
+  }
+
+  @media (max-width: 480px) 
+  {
+      .product-container 
+      {
+          grid-template-columns: 1fr;
+      }
+
+      .product h3 
+      {
+          font-size: 14px;
+      }
+  }
+
+    </style>
+    
+</head>
+
+<body>
+
+
+<div class="navbar">
+	<a href="homepage.html">Home</a>
+    <a href="product.html" class="active">Products</a>
+    <a href="aboutus.html">About Us</a>
+</div>
+
+<div class="aboutbakery">
+	<h1>Bringing the West and India together, one sweet at a time :D</h1>
+
+</div>
+
+<div class="row">
+	<div class="side">
+        <h3>Categories</h3>
+        <div id="category-container">
+            <div class="category-item" onclick="filterProducts('all')">All</div>
+            <div class="category-item" onclick="filterProducts('cakes')">Cakes</div>
+            <div class="category-item" onclick="filterProducts('pastries')">Pastries</div>
+            <div class="category-item" onclick="filterProducts('namkeen')">Namkeen</div>
+            <div class="category-item" onclick="filterProducts('sweets')">Sweets</div>
+            
+        </div>
+    </div>
+    <div class="main">
+
+        <div id="product-container" class="product-container">
+          
+           
+          <div class="product" data-category="cakes">
+            <img src="images\black forest.jpg" alt="Black Forest Cake">
+            <h3>Black Forest Cake</h3>
+            <p>₹800</p>
+            <button onclick="addToCart('Black Forest Cake', 800)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="cakes">
+            <img src="images\rashmalai cake.jpg" alt="Rasmalai Tres Leches Cake">
+            <h3>Rasmalai Tres Leches Cake</h3>
+            <p>₹1200</p>
+            <button onclick="addToCart('Rasmalai Tres Leches Cake', 1200)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="cakes">
+            <img src="images\truffle cake.jpg" alt="Chocolate Truffle Cake">
+            <h3>Chocolate Truffle Cake</h3>
+            <p>₹1000</p>
+            <button onclick="addToCart('Chocolate Truffle Cake', 1000)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="cakes">
+            <img src="images\gulab jamun cheesecake.jpg" alt="Gulab Jamun Cheesecake">
+            <h3>Gulab Jamun Cheesecake</h3>
+            <p>₹1500</p>
+            <button onclick="addToCart('Gulab Jamun Cheesecake', 1500)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="cakes">
+            <img src="images\carrot cake.jpg" alt="Chai Spiced Carrot Cake">
+            <h3>Chai Spiced Carrot Cake</h3>
+            <p>₹900</p>
+            <button onclick="addToCart('Chai Spiced Carrot Cake', 900)">Add to Cart</button>
+          </div>
+
+          
+          
+          <div class="product" data-category="pastries">
+            <img src="images\chocolate eclair.jpg" alt="Chocolate Éclair">
+            <h3>Chocolate Éclair</h3>
+            <p>₹80</p>
+            <button onclick="addToCart('Chocolate Éclair', 80)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="pastries">
+            <img src="images\blueberry cream cheesecake.jpg" alt="Blueberry Cream Cheesecake">
+            <h3>Blueberry Cream Cheese Cake Danish</h3>
+            <p>₹100</p>
+            <button onclick="addToCart('Blueberry Cream Cheese Cake Danish', 100)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="pastries">
+            <img src="images\pineapple pastry.jpg" alt="Pineapple Pastry">
+            <h3>Pineapple Pastry</h3>
+            <p>₹70</p>
+            <button onclick="addToCart('Pineapple Pastry', 70)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="pastries">
+            <img src="images\chocolava.jpg" alt="Chocolava Lava Puff Pastry">
+            <h3>Chocolava Lava Puff Pastry</h3>
+            <p>₹90</p>
+            <button onclick="addToCart('Chocolava Lava Puff Pastry', 90)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="pastries">
+            <img src="images\malaifellee.jpg" alt="Malai Mille-Fueille ">
+            <h3>Malai Mille-Fueille</h3>
+            <p>₹120</p>
+            <button onclick="addToCart('Malai Mille-Fueille', 120)">Add to Cart</button>
+          </div>
+          
+          <div class="product" data-category="namkeen">
+            <img src="images\masala khari.webp" alt="Masala Khari">
+            <h3>Masala Khari</h3>
+            <p>₹60</p>
+            <button onclick="addToCart('Masala Khari', 60)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="namkeen">
+            <img src="images\paneer tikka puff.jpg" alt="Paneer Tikka Puff">
+            <h3>Paneer Tikka Puff</h3>
+            <p>₹70</p>
+            <button onclick="addToCart('Paneer Tikka Puff', 70)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="namkeen">
+            <img src="images\mini samosa.jpg" alt="Mini Samosas(pack of 5)">
+            <h3>Mini Samosas(pack of 5)</h3>
+            <p>₹100</p>
+            <button onclick="addToCart('Mini Samosas(pack of 5)', 100)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="namkeen">
+            <img src="images\aloo masala bread.jpg" alt="Aloo Masala Bread">
+            <h3>Aloo Masala Bread</h3>
+            <p>₹80</p>
+            <button onclick="addToCart('Aloo Masala', 80)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="namkeen">
+            <img src="images\pudina masala mathri.webp" alt="Pudina Mathri">
+            <h3>Pudina Mathri</h3>
+            <p>₹50</p>
+            <button onclick="addToCart('Pudina Mathri', 50)">Add to Cart</button>
+          </div>
+          
+          <div class="product" data-category="sweets">
+            <img src="images\gulab jamun.jpg" alt="Gulab Jamun">
+            <h3>Gulab Jamun</h3>
+            <p>₹140</p>
+            <button onclick="addToCart('Gulab Jamun', 140)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="sweets">
+            <img src="images\rasogulla.jpg" alt="Rasgulla">
+            <h3>Rasgulla</h3>
+            <p>₹120</p>
+            <button onclick="addToCart('Rasgulla', 120)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="sweets">
+            <img src="images\gajar_halwa.jpg" alt="Gajar Halwa">
+            <h3>Gajar Halwa</h3>
+            <p>₹180</p>
+            <button onclick="addToCart('Gajar Halwa', 180)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="sweets">
+            <img src="images\rabri with malpua.jpg" alt="Rabri With Malpua">
+            <h3>Rabri With Malpua</h3>
+            <p>₹250</p>
+            <button onclick="addToCart('Rabri With Malpua', 250)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="sweets">
+            <img src="images\cocunut barfi.jpg" alt="Coconut Barfi">
+            <h3>Coconut Barfi</h3>
+            <p>₹160</p>
+            <button onclick="addToCart('Coconut Barfi', 160)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="sweets">
+            <img src="images\sandesh.jpg" alt="Sandesh">
+            <h3>Sandesh</h3>
+            <p>₹200</p>
+            <button onclick="addToCart('Sandesh', 200)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="sweets">
+            <img src="images\cham cham.jpg" alt="Cham Cham">
+            <h3>Cham Cham</h3>
+            <p>₹180</p>
+            <button onclick="addToCart('Cham Cham', 180)">Add to Cart</button>
+          </div>
+          
+          <div class="product" data-category="sweets">
+            <img src="images\mishti doi.jpg" alt="Mishti Doi">
+            <h3>Mishti Doi</h3>
+            <p>₹120</p>
+            <button onclick="addToCart('Mishti Doi', 120)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="sweets">
+            <img src="images\chena jalebi.jpg" alt="Chena Jalebi">
+            <h3>Chena Jalebi</h3>
+            <p>₹180</p>
+            <button onclick="addToCart('Chena Jalebi', 180)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="sweets">
+            <img src="images\patishapta.jpg" alt="Patishapta">
+            <h3>Patishapta</h3>
+            <p>₹220</p>
+            <button onclick="addToCart('Patishapta', 220)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="sweets">
+            <img src="images\ghevar.jpg" alt="Ghevar">
+            <h3>Ghevar</h3>
+            <p>₹250</p>
+            <button onclick="addToCart('Ghevar', 250)">Add to Cart</button>
+          </div>
+
+          <div class="product" data-category="sweets">
+            <img src="images\rasmalai.jpg" alt="Rasmalai(2 piece)">
+            <h3>Rasmalai(2 piece)</h3>
+            <p>₹150</p>
+            <button onclick="addToCart('Rasmalai(2 piece)', 150)">Add to Cart</button>
+          </div>
+
+          
+          
+        </div>
+      
+	</div>
+</div>
+
+<script>
+    
+    function filterProducts(category) {
+      const products = document.querySelectorAll('.product'); 
+  
+      products.forEach((product) => {
+        if (category === 'all' || product.dataset.category === category) {
+          product.style.display = 'block'; 
+        } else {
+          product.style.display = 'none'; 
+        }
+      });
+    }
+  </script>
+  
+
+  
+  <div style="text-align: center; padding: 20px;">
+    <button class="cart-button" onclick="viewCart()">Go to Cart</button>
+  </div>
+
+  
+  <div id="cartModal" class="cart-container">
+    <h2>Your Cart</h2>
+    <div id="cartItems"></div>
+    <div class="cart-total">
+      Total: ₹<span id="cartTotal">0.00</span>
+    </div>
+    <div>
+      <button class="cart-button" onclick="closeCart()">Close</button>
+    </div>
+  </div>
+  
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) 
+    {
+        const existingProduct = cart.find(item => item.name === name);
+        if (existingProduct) 
+        {
+            existingProduct.quantity++;
+        } else 
+        {
+            cart.push({ name, price, quantity: 1 });
+        }
+        updateCartView();
+        alert(`${name} added to cart!`);  
+    }
+
+
+    function updateCartView() {
+      const cartItemsDiv = document.getElementById('cartItems');
+      const cartTotalSpan = document.getElementById('cartTotal');
+
+      
+      cartItemsDiv.innerHTML = '';
+
+      
+      let total = 0;
+      cart.forEach(product => {
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add('cart-item');
+        itemDiv.innerHTML = `
+          ${product.name} 
+          <div class="quantity-controls">
+            <button onclick="updateQuantity('${product.name}', -1)">−</button>
+            <span>${product.quantity}</span>
+            <button onclick="updateQuantity('${product.name}', 1)">+</button>
+          </div>
+          ₹${(product.price * product.quantity).toFixed(2)}
+        `;
+        cartItemsDiv.appendChild(itemDiv);
+        total += product.price * product.quantity;
+      });
+
+      
+      cartTotalSpan.textContent = total.toFixed(2);
+    }
+
+    function updateQuantity(productName, change) 
+    {
+        const product = cart.find(item => item.name === productName);
+        if (!product) return;
+        
+        product.quantity += change;
+        if (product.quantity <= 0) product.quantity = 1;
+
+        updateCartView(); 
+    }
+
+
+    function viewCart() 
+    {
+        console.log("Viewing cart...");
+        document.getElementById('cartModal').classList.add('show');
+    }
+
+    function closeCart() 
+    {
+        console.log("Closing cart...");
+        document.getElementById('cartModal').classList.remove('show');
+    }
+
+
+  </script>
+
+<footer>
+  <p>Follow us on:</p>
+  <div class="social-icons">
+      <a href="https://www.instagram.com/san_dae_/">&#x1F426; Instagram (Sanchita)</a>
+      <a href="https://www.instagram.com/ikamakshii/">&#x1F426; Instagram (Kamakshi)</a>
+  </div>
+  <p>&copy; 2025 Bakery. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
